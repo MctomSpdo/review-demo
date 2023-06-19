@@ -1,7 +1,10 @@
 package at.htlleonding;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 
 /**
@@ -24,6 +27,15 @@ import jakarta.persistence.Entity;
  * }
  */
 @Entity
-public class MyEntity extends PanacheEntity {
+@Table(name = "A")
+public class MyEntityA extends PanacheEntity {
     public String field;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    public MyEntityB myEntityB;
+
+    @Override
+    public String toString() {
+        return id + "-> " + field;
+    }
 }
